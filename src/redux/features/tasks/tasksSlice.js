@@ -30,7 +30,7 @@ const tasksSlice = createSlice({
             }
         },
         removeTasks: (state, { payload }) => {
-            state.tasks.filter((item) => { item.id !== payload });
+            state.tasks = state.tasks.filter((item) => { item.id !== payload });
 
         },
         updateStatus: (status, { payload }) => {
