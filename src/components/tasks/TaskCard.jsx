@@ -4,9 +4,16 @@ import { removeTasks, updateStatus } from '../../redux/features/tasks/tasksSlice
 
 const TaskCard = ({ task }) => {
 
+  const { priority } = task;
   const dispatch = useDispatch();
 
   let updatedStatus;
+  let priorityColor;
+  if (priority) {
+    if (priority === 'high') priorityColor = 'red';
+    else if (priority === 'medium') priorityColor = 'blue';
+    if (priority === 'low') priorityColor = 'green';
+  }
   if (task.status === 'pending') {
     updatedStatus = 'running';
   }
@@ -20,7 +27,7 @@ const TaskCard = ({ task }) => {
 
   return (
     <div className="bg-secondary/10 rounded-md p-5">
-      <h1 className="text-lg font-semibold mb-3">
+      <h1 style={{color: priorityColor}} className="text-lg font-semibold mb-3">
         {task?.title}
       </h1>
       <p className="mb-3">{task?.description}</p>
@@ -28,7 +35,7 @@ const TaskCard = ({ task }) => {
       <div className="flex justify-between mt-3">
         <p>{task?.date}</p>
         <div className="flex gap-3">
-          <button title="Delete" onClick={()=>dispatch(removeTasks(task.id))}>
+          <button title="Delete" onClick={() => dispatch(removeTasks(task.id))}>
             <TrashIcon className="h-5 w-5 text-red-500" />
           </button>
           <button title="Update status" onClick={() => dispatch(updateStatus({ id: task.id, status: updatedStatus }))}>
