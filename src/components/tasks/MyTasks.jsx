@@ -2,7 +2,8 @@ import {
   CheckIcon,
   DocumentMagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateStatus } from '../../redux/features/tasks/tasksSlice';
 
 const MyTasks = () => {
   // const item = {
@@ -17,6 +18,8 @@ const MyTasks = () => {
   // };
 
   const { tasks } = useSelector((state) => state.tasksSlice);
+  const dispatch = useDispatch();
+
 
   return (
     <div>
@@ -24,17 +27,25 @@ const MyTasks = () => {
       <div className=" h-[750px] overflow-auto space-y-3">
         {tasks?.map(item => <div
           key={item.id}
-          className="bg-secondary/10 rounded-md p-3 flex justify-between"
+
         >
-          <h1>{item.title}</h1>
-          <div className="flex gap-3">
-            <button className="grid place-content-center" title="Details">
-              <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
-            </button>
-            <button className="grid place-content-center" title="Done">
-              <CheckIcon className="w-5 h-5 text-primary" />
-            </button>
-          </div>
+          {
+            item.status !== "archive" && <div className="bg-secondary/10 rounded-md p-3">
+              <div className='flex justify-between'>
+                <div>
+                  <h1>{item.title}</h1>
+                </div>
+                <div className="flex gap-3">
+                  <button className="grid place-content-center" title="Details">
+                    <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
+                  </button>
+                  <button onClick={() => dispatch(updateStatus({ id: item.id, status: "archive" }))} className="grid place-content-center" title="Done">
+                    <CheckIcon className="w-5 h-5 text-primary" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
         </div>)}
       </div>
     </div>
