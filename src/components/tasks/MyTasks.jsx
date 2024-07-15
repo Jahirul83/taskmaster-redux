@@ -29,26 +29,22 @@ const MyTasks = () => {
       <div className=" h-[750px] overflow-auto space-y-3">
         {tasks?.map(item => <div
           key={item.id}
-
-        >
-          {
-            item.status !== "archive" && <div className="bg-secondary/10 rounded-md p-3">
-              <div className='flex justify-between'>
-                <div>
-                  <h1>{item.title}</h1>
-                </div>
-                <div className="flex gap-3">
-                  <button onClick={() => setIsOpen(!isOpen)} className="grid place-content-center" title="Details">
-                    <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
-                    <ShowTaskDetails item={item} isOpen={isOpen} setIsOpen={setIsOpen}></ShowTaskDetails>
-                  </button>
-                  <button onClick={() => dispatch(updateStatus({ id: item.id, status: "archive" }))} className="grid place-content-center" title="Done">
-                    <CheckIcon className="w-5 h-5 text-primary" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          }
+        ><div className="bg-secondary/10 rounded-md p-3">
+        <div className='flex justify-between'>
+          <div>
+            <h1>{item.title}</h1>
+          </div>
+          <div className="flex gap-3">
+            <button onClick={() => setIsOpen(!isOpen)} className="grid place-content-center" title="Details">
+              <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
+              <ShowTaskDetails item={item} isOpen={isOpen} setIsOpen={setIsOpen}></ShowTaskDetails>
+            </button>
+            <button onClick={() => dispatch(updateStatus({ id: item.id, status: "archive" }))} className="grid place-content-center" title="Done">
+              <CheckIcon className="w-5 h-5 text-primary" />
+            </button>
+          </div>
+        </div>
+      </div>
         </div>)}
       </div>
     </div>
