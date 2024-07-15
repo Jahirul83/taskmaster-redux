@@ -120,7 +120,7 @@ const Tasks = () => {
             </div>
           </div>
         </div>
-        <MyTasks />
+        <MyTasks/>
       </div>
     </div>
   );

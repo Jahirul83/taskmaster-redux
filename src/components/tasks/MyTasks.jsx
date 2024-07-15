@@ -4,6 +4,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateStatus } from '../../redux/features/tasks/tasksSlice';
+import { useState } from 'react';
+import ShowTaskDetails from './ShowTaskDetails';
 
 const MyTasks = () => {
   // const item = {
@@ -16,7 +18,7 @@ const MyTasks = () => {
   //   assignedTo: 'Mir Hussain',
   //   priority: 'high',
   // };
-
+  const [isOpen, setIsOpen] = useState(false);
   const { tasks } = useSelector((state) => state.tasksSlice);
   const dispatch = useDispatch();
 
@@ -36,8 +38,9 @@ const MyTasks = () => {
                   <h1>{item.title}</h1>
                 </div>
                 <div className="flex gap-3">
-                  <button className="grid place-content-center" title="Details">
+                  <button onClick={() => setIsOpen(!isOpen)} className="grid place-content-center" title="Details">
                     <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
+                    <ShowTaskDetails item={item} isOpen={isOpen} setIsOpen={setIsOpen}></ShowTaskDetails>
                   </button>
                   <button onClick={() => dispatch(updateStatus({ id: item.id, status: "archive" }))} className="grid place-content-center" title="Done">
                     <CheckIcon className="w-5 h-5 text-primary" />
