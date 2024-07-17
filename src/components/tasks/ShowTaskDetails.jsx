@@ -2,11 +2,11 @@ import Modal from "../ui/Modal";
 
 
 const ShowTaskDetails = ({ item, isOpen, setIsOpen }) => {
-    const { status, title, description, date, assignedTo, priority } = item;
-    // console.log(Object.keys(item));
+    const {status, title, description, date, assignedTo, priority } = item;
+    // console.log(item);
 
 
-    const onCancel = () => {
+    const onOk = () => {
         setIsOpen(false);
     };
 
@@ -24,7 +24,7 @@ const ShowTaskDetails = ({ item, isOpen, setIsOpen }) => {
                         <p>{date}</p>
                         <p>{priority}</p>
                     </div>
-                    <button onClick={() => onCancel()} type="button" className="btn btn-primary">Ok</button>
+                    <button onClick={() => onOk()} type="button" className="btn btn-primary">Ok</button>
                 </div>
             </Modal>
         </div>

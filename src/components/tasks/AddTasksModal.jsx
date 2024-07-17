@@ -67,6 +67,7 @@ const AddTasksModal = ({ isOpen, setIsOpen }) => {
                         <option value="sakib">sakib</option>
                         <option value="tamim">tamim</option>
                         <option value="asraf">asraf</option>
+                        <option value="Mir Hussain">Mir Hussain</option>
                     </select>
                 </div>
                 <div className="flex flex-col mb-5">

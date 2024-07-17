@@ -11,7 +11,8 @@ const initialState = {
         date: '2023-08-28',
         assignedTo: 'Mir Hussain',
         priority: 'high',
-    }]
+    }],
+    userSpecificTasks: [],
 }
 
 
@@ -30,14 +31,17 @@ const tasksSlice = createSlice({
             }
         },
         removeTasks: (state, { payload }) => {
-            state.tasks = state.tasks.filter((item) =>  item.id !== payload );
+            state.tasks = state.tasks.filter((item) => item.id !== payload);
 
         },
         updateStatus: (status, { payload }) => {
             const target = status.tasks.find((item) => item.id === payload.id);
             target.status = payload.status;
+        },
+        userTasks: (state, { payload }) => {
+            state.userSpecificTasks = state.tasks.filter(item => item.assignedTo === payload);
         }
     }
 });
-export const { addTask, removeTasks, updateStatus } = tasksSlice.actions;
+export const { addTask, removeTasks, updateStatus, userTasks } = tasksSlice.actions;
 export default tasksSlice.reducer;
