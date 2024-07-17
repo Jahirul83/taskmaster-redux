@@ -3,7 +3,7 @@ import {
   DocumentMagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';
-import { userTasks } from '../../redux/features/tasks/tasksSlice';
+import { updateStatus, userTasks } from '../../redux/features/tasks/tasksSlice';
 import { useEffect } from 'react';
 
 const MyTasks = () => {
@@ -47,12 +47,9 @@ const MyTasks = () => {
                   <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
                   <ShowTaskDetails item={item} isOpen={isOpen} setIsOpen={setIsOpen}></ShowTaskDetails>
                 </button> */}
-                <button className="grid place-content-center" title="Done">
+                <button onClick={() => dispatch(updateStatus({ id: item.id, status: "done" }))} className="grid place-content-center" title="Done">
                   <CheckIcon className="w-5 h-5 text-primary" />
                 </button>
-                {/* <button onClick={() => dispatch(updateStatus({ id: item.id, status: "done" }))} className="grid place-content-center" title="Done">
-                  <CheckIcon className="w-5 h-5 text-primary" />
-                </button> */}
               </div>
             </div>
           </div>

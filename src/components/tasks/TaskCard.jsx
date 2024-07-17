@@ -8,12 +8,14 @@ const TaskCard = ({ task }) => {
   const dispatch = useDispatch();
 
   let updatedStatus;
-  let priorityColor;
-  if (priority) {
-    if (priority === 'high') priorityColor = 'red';
-    else if (priority === 'medium') priorityColor = 'blue';
-    if (priority === 'low') priorityColor = 'green';
-  }
+
+  // let priorityColor;
+  // if (priority) {
+  //   if (priority === 'high') priorityColor = 'red';
+  //   else if (priority === 'medium') priorityColor = 'blue';
+  //   if (priority === 'low') priorityColor = 'green';
+  // }
+  
   if (task.status === 'pending') {
     updatedStatus = 'running';
   }
@@ -27,7 +29,13 @@ const TaskCard = ({ task }) => {
 
   return (
     <div className="bg-secondary/10 rounded-md p-5">
-      <h1 style={{color: priorityColor}} className="text-lg font-semibold mb-3">
+      {/* <h1 style={{color: priorityColor}} className="text-lg font-semibold mb-3">
+        {task?.title}
+      </h1> */}
+      <h1 className={`text-lg font-semibold mb-3 
+        ${priority === 'high' && 'text-red-500'} 
+        ${priority === 'medium' && 'text-yellow-500'}
+        ${priority === 'low' && 'text-green-500'}`}>
         {task?.title}
       </h1>
       <p className="mb-3">{task?.description}</p>
