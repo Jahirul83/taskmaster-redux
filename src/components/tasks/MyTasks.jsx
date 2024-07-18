@@ -4,7 +4,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateStatus, userTasks } from '../../redux/features/tasks/tasksSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import ShowTaskDetails from './ShowTaskDetails';
 
 const MyTasks = () => {
   // const item = {
@@ -17,11 +18,17 @@ const MyTasks = () => {
   //   assignedTo: 'Mir Hussain',
   //   priority: 'high',
   // };
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [TaskId, setTaskId] = useState(0);
+
   const { tasks, userSpecificTasks } = useSelector((state) => state.tasksSlice);
   const { name: userName } = useSelector((state) => state.userSlice)
   const dispatch = useDispatch();
 
+  const handleTaskId = (id) => {
+    setTaskId(id);
+    setIsOpen(!isOpen);
+  }
 
   useEffect(() => {
     dispatch(userTasks(userName))
@@ -30,6 +37,7 @@ const MyTasks = () => {
 
   return (
     <div>
+      <ShowTaskDetails isOpen={isOpen} setIsOpen={setIsOpen} id={TaskId} />
       <h1 className="text-xl my-3">My Tasks</h1>
       <div className=" h-[750px] overflow-auto space-y-3">
         {userSpecificTasks?.map(item => <div
@@ -40,7 +48,7 @@ const MyTasks = () => {
                 <h1>{item.title}</h1>
               </div>
               <div className="flex gap-3">
-                <button className="grid place-content-center" title="Details">
+                <button onClick={() => handleTaskId(item.id)} className="grid place-content-center" title="Details">
                   <DocumentMagnifyingGlassIcon className="w-5 h-5 text-primary" />
                 </button>
                 {/* <button onClick={() => setIsOpen(!isOpen)} className="grid place-content-center" title="Details">
